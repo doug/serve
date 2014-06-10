@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"net/http"
 )
 
@@ -10,5 +11,7 @@ var root = flag.String("root", ".", "Define the root filesystem path")
 
 func main() {
 	flag.Parse()
-	panic(http.ListenAndServe(":"+*port, http.FileServer(http.Dir(*root))))
+	addr := ":" + *port
+	fmt.Printf("Listening on %s...", addr)
+	panic(http.ListenAndServe(addr, http.FileServer(http.Dir(*root))))
 }
